@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config'
 
-import { signupValidator } from '../middlewares/validators.js';
+import { signupValidator, loginValidator } from '../middlewares/validators.js';
 
 import User from '../models/userSchema.js';
 
@@ -29,7 +29,7 @@ router.post('/signup', signupValidator, async (req, res) => {
     }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', loginValidator, async (req, res) => {
     try {
         const { email, password } = req.body
 
