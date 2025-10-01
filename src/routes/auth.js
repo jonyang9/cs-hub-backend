@@ -3,11 +3,13 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config'
 
+import { signupValidator } from '../middlewares/validators.js';
+
 import User from '../models/userSchema.js';
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', signupValidator, async (req, res) => {
     try {
         const { username, email, password } = req.body
 
