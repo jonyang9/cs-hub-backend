@@ -8,7 +8,7 @@ const jobSchema = new Schema({
     location: String,
     startDate: String,
     duration: String,
-    applicationDeadline: String,
+    deadline: String,
     dateApplied: String,
     interviewDate: String,
     applicationLink: String,

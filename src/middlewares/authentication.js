@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization']
     if (!authHeader?.startsWith("Bearer ")) {
-        return res.status(401).json({ message: "Authorization header missing" })
+        return res.status(401).json({ message: "Authorization header invalid" })
     }
     const token = authHeader.split(' ')[1]
 

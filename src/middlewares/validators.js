@@ -44,3 +44,45 @@ export const loginValidator = [
     }
 ]
 
+export const projectValidator = [
+    body("name")
+        .trim()
+        .notEmpty().withMessage("Project name cannot be empty"),
+
+    body("description")
+        .trim()
+        .escape(),
+
+    body('langs.*')
+        .trim()
+        .escape(),
+
+    body('tasks.*')
+        .trim()
+        .escape(),
+
+    body('githubLink')
+        .trim()
+        .isURL().withMessage('GitHub link must be a valid url'),
+
+    (req, res, next) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+    }
+]
+
+export const jobValidator = [
+    body("company")
+        .trim()
+        .notEmpty().withMessage("Company cannot be empty"),
+
+    (req, res, next) => {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() })
+        }
+    }
+]
+
