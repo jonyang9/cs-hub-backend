@@ -43,12 +43,25 @@ router.post('/projects', authenticateToken, projectValidator, async (req, res) =
 
 router.post('/jobs', authenticateToken, jobValidator, async (req, res) => {
     const userId = req.userId
-    // express validate the body
     try {
         const job = await Job.create({...req.body, user: userId})
         res.status(201).json(job)
     } catch (err) {
         res.status(500).json({ message: "Server error adding job to database" })
+    }
+})
+
+router.patch('/projects/:id', authenticateToken, async (req, res) => {
+    const projectId = req.params.id
+    const updates = req.body
+    try {
+        const updatedProject = await Project.findByIdAndUpdate(projectId, updates, {
+            new: true,
+            runValidators: true
+        })
+
+    } catch (err) {
+
     }
 })
 
