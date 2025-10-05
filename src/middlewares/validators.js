@@ -22,7 +22,11 @@ export const signupValidator = [
     (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
+            return res.status(400).json({
+                success: false,
+                data: { errors: errors.array() },
+                message: 'Signup validation failed!'
+            })
         }
         next()
     }
@@ -38,7 +42,11 @@ export const loginValidator = [
     (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() })
+            return res.status(400).json({
+                success: false,
+                data: { errors: errors.array() },
+                message: 'Login validation failed! '
+            })
         }
         next()
     }
@@ -70,6 +78,8 @@ export const projectValidator = [
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })
         }
+
+        next()
     }
 ]
 
@@ -83,6 +93,8 @@ export const jobValidator = [
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })
         }
+
+        next()
     }
 ]
 
