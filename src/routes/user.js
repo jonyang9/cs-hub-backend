@@ -1,8 +1,6 @@
 import express from 'express'
 import authenticateToken from '../middlewares/authentication'
 
-// project and job application validators
-
 import Project from '../models/projectSchema'
 import Job from '../models/jobSchema'
 import { projectValidator, jobValidator } from '../middlewares/validators'
@@ -162,7 +160,5 @@ router.delete('/jobs/:id', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Server error deleting job' })
     }
 })
-
-
 
 export default router
