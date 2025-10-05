@@ -123,6 +123,46 @@ router.patch('/jobs/:id', authenticateToken, async (req, res) => {
     }
 })
 
+router.delete('/projects/:id', authenticateToken, async (req, res) => {
+    const projectId = req.params.id
+    const userId = req.userId
+
+    try {
+        const deletedProject = await Project.findOneAndDelete({
+            _id: projectId,
+            user: userId
+        })
+
+        if (!deletedProject) {
+            return res.status(404).json({ message: 'Project not found or authorized' })
+        }
+
+        res.status(200).json({ message: 'Project deleted successfully' })
+    } catch (err) {
+        res.status(500).json({ message: 'Server error deleting project' })
+    }
+})
+
+router.delete('/jobs/:id', authenticateToken, async (req, res) => {
+    const jobId = req.params.id
+    const userId = req.userId
+
+    try {
+        const deletedJob = await Job.findOneAndDelete({
+            _id: jobId,
+            user: userId
+        })
+
+        if (!deletedJob) {
+            return res.status(404).json({ message: 'Job not found or authorized' })
+        }
+
+        res.status(200).json({ message: 'Job deleted successfully' })
+    } catch (err) {
+        res.status(500).json({ message: 'Server error deleting job' })
+    }
+})
+
 
 
 export default router
